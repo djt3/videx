@@ -8,6 +8,8 @@ namespace videx {
     std::string url;
     std::string title;
     std::string length;
+    std::string thumbnail;
+    std::string channel;
   };
 }
 

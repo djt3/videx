@@ -15,6 +15,7 @@ namespace videx {
 
   std::string extract_playback(const std::string& url) {
     if (url.find("youtube.com") != std::string::npos) {
+      return videx::extractors::yt::extract_playback(url);
     }
 
 

@@ -8,6 +8,7 @@
 
 namespace videx::extractors::yt {
   extern std::vector<video> extract_videos(const std::string& url);
+  extern std::string extract_playback(const std::string& url);
 }
 
 #endif

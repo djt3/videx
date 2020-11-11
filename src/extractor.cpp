@@ -31,7 +31,10 @@ namespace videx::extractors::yt {
       video video;
 
       index = src.find("\"videoId\"", index) + strlen("\"videoId\":\"");
-      video.url = +"https://youtube.com/watch?v=" + src.substr(index, 11);
+      video.url = "/watch?v=" + src.substr(index, 11);
+
+      index = src.find("\"url\":\"", index) + strlen("\"url\":\"");
+      video.thumbnail = src.substr(index, src.find("\"", index) - index);
 
       if (compact)
         index = src.find("simpleText", index) + strlen("simpleText\":\"");
@@ -40,6 +43,9 @@ namespace videx::extractors::yt {
 
       video.title = src.substr(index, src.find("\"", index) - index);
 
+      index = src.find("longBylineText", index) + strlen("longBylineText\":{\"runs\":[{\"text\":\"");
+      video.channel = src.substr(index, src.find("\"", index) - index);
+
       index = src.find("lengthText", index);
       index = src.find("simpleText", index) + strlen("simpleText\":\"");
 
@@ -47,9 +53,6 @@ namespace videx::extractors::yt {
 
       videos.push_back(video);
     }
-
-    for (const auto& video : videos)
-      std::cout << video.url << " - " << video.title << " - " << video.length << std::endl;
 
     return videos;
   }
