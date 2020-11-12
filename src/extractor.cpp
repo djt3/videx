@@ -16,23 +16,27 @@ namespace videx::extractors::yt {
     while (index != std::string::npos) {
       bool compact = false;
 
-      std::size_t temp_index = src.find("compactVideoRenderer\":{\"videoId", index);
-      if (temp_index == std::string::npos) {
+      index = src.find("compactVideoRenderer\":{\"videoId", index);
+      if (index == std::string::npos) {
         index = src.find("videoRenderer\":{\"videoId", index);
+
+        if (index == std::string::npos)
+          index = src.find("VideoRenderer\":{\"videoId", index);
 
         if (index == std::string::npos)
           break;
       }
       else {
-        index = temp_index;
+        index = index;
         compact = true;
       }
 
+      std::cout << "ASKJDJKASDK";
       video video;
 
       index = src.find("\"videoId\"", index) + strlen("\"videoId\":\"");
       video.url = "/watch?v=" + src.substr(index, 11);
-
+      std::cout << video.url << "kadfklaksdf" << std::endl;
       index = src.find("\"url\":\"", index) + strlen("\"url\":\"");
       video.thumbnail = src.substr(index, src.find("\"", index) - index);
 
@@ -45,6 +49,9 @@ namespace videx::extractors::yt {
 
       index = src.find("longBylineText", index) + strlen("longBylineText\":{\"runs\":[{\"text\":\"");
       video.channel = src.substr(index, src.find("\"", index) - index);
+
+      index = src.find("webCommandMetadata", index) + strlen("webCommandMetadata\":{\"url\":\"/");
+      video.channel_url = src.substr(index, src.find("\"", index) - index);
 
       index = src.find("lengthText", index);
       index = src.find("simpleText", index) + strlen("simpleText\":\"");

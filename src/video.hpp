@@ -10,6 +10,7 @@ namespace videx {
     std::string length;
     std::string thumbnail;
     std::string channel;
+    std::string channel_url;
   };
 }
 
