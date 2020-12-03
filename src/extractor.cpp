@@ -48,6 +48,7 @@ namespace videx::extractors::yt {
         index = src.find("\"title\":{\"runs\":[{\"text\":\"", index) + strlen("\"title\":{\"runs\":[{\"text\":\"");
 
       video.title = src.substr(index, src.find("\"", index) - index);
+      video.cleanup_title();
 
       if (!channel) {
         index = src.find("longBylineText", index) + strlen("longBylineText\":{\"runs\":[{\"text\":\"");
