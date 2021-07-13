@@ -14,8 +14,7 @@ namespace videx::requests {
 
     request.setOpt(cURLpp::Options::WriteStream(&result));
     request.setOpt<curlpp::options::Url>(url);
-    request.setOpt<curlpp::options::UserAgent>("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0");
-
+    
     request.perform();
 
     return result.str();
