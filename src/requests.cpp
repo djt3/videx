@@ -17,10 +17,6 @@ namespace videx::requests {
 
     request.perform();
 
-    std::string str = result.str();
-
-    std::string ret = "";
-
-    return str;
+    return result.str();
   }
   } // namespace videx::requests
