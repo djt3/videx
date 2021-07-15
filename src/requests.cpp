@@ -1,12 +1,12 @@
 #include "requests.hpp"
 
 #include <curlpp/Easy.hpp>
-#include <curlpp/cURLpp.hpp>
 #include <curlpp/Options.hpp>
+#include <curlpp/cURLpp.hpp>
 #include <sstream>
 
 namespace videx::requests {
-  std::string make_request(const std::string& url) {
+  std::string make_request(const std::string &url) {
     curlpp::Cleanup cleanup;
 
     std::stringstream result;
@@ -14,9 +14,13 @@ namespace videx::requests {
 
     request.setOpt(cURLpp::Options::WriteStream(&result));
     request.setOpt<curlpp::options::Url>(url);
-    
+
     request.perform();
 
-    return result.str();
+    std::string str = result.str();
+
+    std::string ret = "";
+
+    return str;
   }
-}
+  } // namespace videx::requests
